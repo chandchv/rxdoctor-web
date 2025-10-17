@@ -70,6 +70,14 @@ const Header: React.FC = () => {
             <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
               Get Started
             </button>
+            <a
+              href="https://app.rxdoctor.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              RxDoctor App
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -106,6 +114,14 @@ const Header: React.FC = () => {
               <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Get Started
               </button>
+              <a
+                href="/app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center mt-2"
+              >
+                App Dashboard
+              </a>
             </div>
           </div>
         </div>

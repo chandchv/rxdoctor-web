@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,9 @@ const Contact: React.FC = () => {
     message: '',
     practiceSize: 'small'
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -19,50 +22,97 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        practice: '',
-        message: '',
-        practiceSize: 'small'
-      });
-    }, 3000);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      // EmailJS configuration - You'll need to set these up at https://www.emailjs.com/
+      const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+      const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+      const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+
+      // Prepare template parameters
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone || 'Not provided',
+        practice: formData.practice || 'Not provided',
+        practice_size: formData.practiceSize,
+        message: formData.message || 'No additional message',
+        to_email: 'rxdoctor24@gmail.com',
+        reply_to: formData.email
+      };
+
+      // Send email using EmailJS
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      );
+
+      if (response.status === 200) {
+        setSubmitStatus('success');
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus('idle');
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            practice: '',
+            message: '',
+            practiceSize: 'small'
+          });
+        }, 5000);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error: any) {
+      console.error('Email sending error:', error);
+      setSubmitStatus('error');
+      setErrorMessage(
+        error?.text || 
+        'Failed to send message. Please try again or contact us directly at rxdoctor24@gmail.com'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
     {
       icon: Phone,
       title: 'Phone',
-      details: ['+1 (555) 123-4567', '+1 (555) 987-6543'],
-      description: 'Mon-Fri 8AM-8PM EST'
+      details: ['+91 967 6399 934', '+91 843 1361 112'],
+      description: 'Mon-Fri 9AM-6PM IST',
+      clickable: true,
+      href: 'tel:+919676399934'
     },
     {
       icon: Mail,
       title: 'Email',
-      details: ['sales@rxdoctor.com', 'support@rxdoctor.com'],
-      description: '24/7 email support'
+      details: ['rxdoctor24@gmail.com', 'support@rxdoctor.com'],
+      description: '24/7 email support',
+      clickable: true,
+      href: 'mailto:rxdoctor24@gmail.com'
     },
     {
       icon: MapPin,
       title: 'Office',
-      details: ['123 Healthcare Blvd', 'Medical District, CA 90210'],
-      description: 'Visit our headquarters'
+      details: ['Bangalore', 'India'],
+      description: 'Serving healthcare nationwide',
+      clickable: false
     },
     {
       icon: Clock,
       title: 'Support Hours',
-      details: ['24/7 Emergency Support', 'Business Hours: 8AM-8PM EST'],
-      description: 'Always here when you need us'
+      details: ['24/7 Emergency Support', 'Business Hours: 9AM-6PM IST'],
+      description: 'Always here when you need us',
+      clickable: false
     }
   ];
 
@@ -88,7 +138,7 @@ const Contact: React.FC = () => {
               Schedule Your Free Consultation
             </h3>
 
-            {!isSubmitted ? (
+            {submitStatus === 'idle' || submitStatus === 'error' ? (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
@@ -102,7 +152,8 @@ const Contact: React.FC = () => {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed"
                       placeholder="Dr. John Smith"
                     />
                   </div>
@@ -117,7 +168,8 @@ const Contact: React.FC = () => {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -134,8 +186,9 @@ const Contact: React.FC = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                      placeholder="+1 (555) 123-4567"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      placeholder="+91 98765 43210"
                     />
                   </div>
                   <div>
@@ -147,7 +200,8 @@ const Contact: React.FC = () => {
                       name="practiceSize"
                       value={formData.practiceSize}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed"
                     >
                       <option value="small">1-5 Doctors</option>
                       <option value="medium">6-20 Doctors</option>
@@ -167,32 +221,55 @@ const Contact: React.FC = () => {
                     name="practice"
                     value={formData.practice}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="Medical Center Name"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Tell us about your needs
+                    Tell us about your needs *
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={4}
+                    required
                     value={formData.message}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="What challenges are you facing with your current system? What features are most important to you?"
                   />
                 </div>
 
+                {submitStatus === 'error' && (
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start space-x-3">
+                    <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-red-900 mb-1">Error Sending Message</h4>
+                      <p className="text-sm text-red-700">{errorMessage}</p>
+                    </div>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full btn-primary flex items-center justify-center space-x-2"
+                  disabled={isSubmitting}
+                  className="w-full btn-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-5 h-5" />
-                  <span>Send Message</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader className="w-5 h-5 animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </>
+                  )}
                 </button>
 
                 <p className="text-sm text-gray-600 text-center">
@@ -205,9 +282,11 @@ const Contact: React.FC = () => {
                   <CheckCircle className="w-8 h-8 text-green-600" />
                 </div>
                 <h4 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h4>
+                <p className="text-gray-600 mb-4">
+                  Your message has been sent successfully to <span className="font-semibold">rxdoctor24@gmail.com</span>
+                </p>
                 <p className="text-gray-600">
-                  Your message has been sent successfully. Our team will contact you within 24 hours 
-                  to schedule your free consultation.
+                  Our team will contact you within 24 hours to schedule your free consultation.
                 </p>
               </div>
             )}
@@ -234,7 +313,17 @@ const Contact: React.FC = () => {
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">{info.title}</h4>
                     {info.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-gray-700 mb-1">{detail}</p>
+                      info.clickable && detailIndex === 0 ? (
+                        <a 
+                          key={detailIndex} 
+                          href={info.href}
+                          className="text-primary-600 hover:text-primary-700 font-medium mb-1 block"
+                        >
+                          {detail}
+                        </a>
+                      ) : (
+                        <p key={detailIndex} className="text-gray-700 mb-1">{detail}</p>
+                      )
                     ))}
                     <p className="text-sm text-gray-500">{info.description}</p>
                   </div>
@@ -246,15 +335,21 @@ const Contact: React.FC = () => {
             <div className="bg-gradient-to-br from-primary-600 to-secondary-600 rounded-2xl p-8 text-white">
               <h4 className="text-xl font-bold mb-4">Need Immediate Assistance?</h4>
               <p className="text-blue-100 mb-6">
-                Our support team is available 24/7 for urgent technical issues and emergency support.
+                Our support team is available during business hours for urgent technical issues and support inquiries.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-colors">
-                  Call Emergency Support
-                </button>
-                <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-6 rounded-lg transition-colors">
-                  Live Chat
-                </button>
+                <a 
+                  href="tel:+919676399934"
+                  className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-colors text-center"
+                >
+                  Call Support
+                </a>
+                <a 
+                  href="mailto:rxdoctor24@gmail.com"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-6 rounded-lg transition-colors text-center"
+                >
+                  Email Us
+                </a>
               </div>
             </div>
 
@@ -274,6 +369,10 @@ const Contact: React.FC = () => {
                   <h5 className="font-medium text-gray-900">Can we migrate existing data?</h5>
                   <p className="text-gray-600 text-sm">Absolutely! We handle data migration from most existing systems.</p>
                 </div>
+                <div>
+                  <h5 className="font-medium text-gray-900">Is it HIPAA compliant?</h5>
+                  <p className="text-gray-600 text-sm">Yes, RxDoctor is fully HIPAA compliant and follows all security standards.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -283,4 +382,4 @@ const Contact: React.FC = () => {
   );
 };
 
-export default Contact; 
+export default Contact;
