@@ -11,6 +11,26 @@ A modern, responsive website for RxDoctor healthcare management platform built w
 - **Pricing Plans**: Detailed subscription plans with comparison
 - **Testimonials**: Customer reviews and success stories
 - **Performance Optimized**: Fast loading times and smooth animations
+- **Symptom-Based Doctor Recommendation**: AI-inspired triage assistant that maps user symptoms to medical specialities and nearby doctors
+
+## 🩺 Symptom-Based Flow
+
+### Overview
+The home page now includes a three-step wizard (`SymptomChecker.tsx`) that:
+1. Collects free-form symptoms plus optional location/GPS details.
+2. Runs a Level-1 rule-based classifier powered by `disease_symptom_speciality.json`.
+3. Surfaces nearby specialists (mocked today) along with teleconsult fallbacks and deep links to RxDoctor booking.
+
+### Architecture
+- **Classifier service** (`src/services/symptomClassifier.ts`): Normalizes the JSON dataset, scores each disease by symptom overlap, and returns a `SymptomAssessment` with speciality, urgency, confidence, and candidate conditions.
+- **Doctor API shim** (`src/services/doctorApi.ts`): Provides typed responses and sample data until the real backend endpoint is wired. Replace `findNearbyDoctors` with a fetch call later without touching the UI.
+- **UI component** (`SymptomChecker.tsx`): Handles form state, GPS fallback, error messaging, speciality display, and doctor cards with booking links `https://rxdoctor.in/book/<id>` plus app deep links `rxdoctor://doctor/<id>/book`.
+
+### Extending the Flow
+- To integrate a backend/LLM classifier, keep the `SymptomAssessment` shape and swap the implementation inside `classifySymptoms`.
+- Configure urgency rules in `SPECIALITY_URGENCY` to fine-tune chip colors and messaging.
+- Replace the mock doctor list by updating `findNearbyDoctors` to call your API and return the same `DoctorProfile` interface.
+- Track analytics by emitting events on submit, speciality confirmation, and booking clicks inside `SymptomChecker`.
 
 ## 🛠 Tech Stack
 

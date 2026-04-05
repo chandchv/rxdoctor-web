@@ -1,28 +1,27 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import Pricing from './components/Pricing';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Stats from './components/Stats';
-import About from './components/About';
+import HomePage from './pages/HomePage';
+import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
+const SymptomCheckerPage = lazy(() => import('./pages/SymptomCheckerPage'));
+const GalleryFeaturePage = lazy(() => import('./pages/GalleryFeaturePage'));
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Hero />
-      <Stats />
-      <Features />
-      <About />
-      <Pricing />
-      <Testimonials />
-      <Contact />
-      <Footer />
-    </div>
+    <>
+      <Suspense fallback={<div style={{ padding: 24, color: '#6b7280' }}>Loading…</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/symptom-checker" element={<SymptomCheckerPage />} />
+          <Route path="/gallery/:slug" element={<GalleryFeaturePage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+      <WhatsAppFloatingButton
+        phoneNumber="918431361112"
+        defaultMessage="Hi, I'd like to know more about RxDoctor"
+      />
+    </>
   );
 }
 

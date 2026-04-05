@@ -1,7 +1,36 @@
-import React from 'react';
-import { ArrowRight, Play, CheckCircle } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ArrowRight, Play, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { galleryFeatures } from '../data/galleryItems';
 
 const Hero: React.FC = () => {
+  const slides = useMemo(
+    () =>
+      galleryFeatures.slice(0, 6).map((feature) => ({
+        image: feature.image,
+        title: feature.title,
+        tagline: feature.tagline,
+        slug: feature.slug,
+      })),
+    []
+  );
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    if (slides.length <= 1) {
+      return;
+    }
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  const goToSlide = (index: number) => {
+    if (slides.length === 0) return;
+    const normalized = (index + slides.length) % slides.length;
+    setCurrentSlide(normalized);
+  };
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -87,47 +116,62 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Hero Image/Illustration */}
+          {/* Hero Image Slider */}
           <div className="relative animate-float mt-8 lg:mt-0">
-            <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl">
-              {/* Mock Dashboard */}
-              <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                    <div className="ml-auto text-white text-xs sm:text-sm font-medium">RxDoctor Dashboard</div>
-                  </div>
-                </div>
-                <div className="p-4 sm:p-6 space-y-4">
-                  <div className="grid grid-cols-3 gap-2 sm:gap-4">
-                    <div className="bg-blue-50 p-3 sm:p-4 rounded-lg">
-                      <div className="text-lg sm:text-2xl font-bold text-blue-600">127</div>
-                      <div className="text-xs sm:text-sm text-gray-600">Patients</div>
-                    </div>
-                    <div className="bg-green-50 p-3 sm:p-4 rounded-lg">
-                      <div className="text-lg sm:text-2xl font-bold text-green-600">23</div>
-                      <div className="text-xs sm:text-sm text-gray-600">Today</div>
-                    </div>
-                    <div className="bg-purple-50 p-3 sm:p-4 rounded-lg">
-                      <div className="text-lg sm:text-2xl font-bold text-purple-600">$12k</div>
-                      <div className="text-xs sm:text-sm text-gray-600">Revenue</div>
+            <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-1 sm:p-1.5 border border-white/20 shadow-2xl overflow-hidden">
+              <div
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {slides.map((slide) => (
+                  <div key={slide.slug} className="relative min-w-full">
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      className="w-full h-[360px] sm:h-[420px] object-cover rounded-3xl"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent p-6 rounded-b-3xl">
+                      <p className="text-sm uppercase tracking-[0.4em] text-blue-200">
+                        Featured
+                      </p>
+                      <h3 className="text-2xl font-semibold text-white">{slide.title}</h3>
+                      <p className="text-gray-200 text-sm mt-1">{slide.tagline}</p>
                     </div>
                   </div>
-                  <div className="space-y-3">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full"></div>
-                        <div className="flex-1">
-                          <div className="h-2 sm:h-3 bg-gray-300 rounded w-3/4 mb-2"></div>
-                          <div className="h-1 sm:h-2 bg-gray-200 rounded w-1/2"></div>
-                        </div>
-                      </div>
+                ))}
+              </div>
+
+              {slides.length > 1 && (
+                <>
+                  <button
+                    className="absolute top-1/2 left-4 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-gray-900 flex items-center justify-center shadow-lg hover:bg-white transition"
+                    onClick={() => goToSlide(currentSlide - 1)}
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    className="absolute top-1/2 right-4 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-gray-900 flex items-center justify-center shadow-lg hover:bg-white transition"
+                    onClick={() => goToSlide(currentSlide + 1)}
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                  <div className="absolute bottom-5 inset-x-0 flex justify-center gap-2">
+                    {slides.map((slide, index) => (
+                      <button
+                        key={slide.slug}
+                        onClick={() => goToSlide(index)}
+                        className={`h-2.5 rounded-full transition-all ${
+                          currentSlide === index ? 'w-10 bg-white' : 'w-2.5 bg-white/50'
+                        }`}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
                     ))}
                   </div>
-                </div>
-              </div>
+                </>
+              )}
             </div>
           </div>
         </div>

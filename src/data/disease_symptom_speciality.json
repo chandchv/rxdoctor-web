@@ -1,0 +1,528 @@
+{
+    "Fungal infection": {
+        "speciality": "Dermatology",
+        "symptoms": [
+            "nodal_skin_eruptions",
+            "skin_rash",
+            "dischromic _patches",
+            "itching"
+        ]
+    },
+    "Allergy": {
+        "speciality": "Allergist / Immunologist",
+        "symptoms": [
+            "watering_from_eyes",
+            "chills",
+            "shivering",
+            "continuous_sneezing"
+        ]
+    },
+    "GERD": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "cough",
+            "vomiting",
+            "stomach_pain",
+            "ulcers_on_tongue",
+            "acidity",
+            "chest_pain"
+        ]
+    },
+    "Chronic cholestasis": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "vomiting",
+            "nausea",
+            "yellowing_of_eyes",
+            "abdominal_pain",
+            "yellowish_skin",
+            "loss_of_appetite",
+            "itching"
+        ]
+    },
+    "Drug Reaction": {
+        "speciality": "Dermatology",
+        "symptoms": [
+            "skin_rash",
+            "burning_micturition",
+            "itching",
+            "stomach_pain",
+            "spotting_ urination"
+        ]
+    },
+    "Peptic ulcer diseae": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "passage_of_gases",
+            "vomiting",
+            "internal_itching",
+            "abdominal_pain",
+            "indigestion",
+            "loss_of_appetite"
+        ]
+    },
+    "AIDS": {
+        "speciality": "Infectious Disease Specialist",
+        "symptoms": [
+            "extra_marital_contacts",
+            "high_fever",
+            "muscle_wasting",
+            "patches_in_throat"
+        ]
+    },
+    "Diabetes": {
+        "speciality": "Endocrinology",
+        "symptoms": [
+            "obesity",
+            "weight_loss",
+            "lethargy",
+            "increased_appetite",
+            "restlessness",
+            "fatigue",
+            "polyuria",
+            "excessive_hunger",
+            "irregular_sugar_level",
+            "blurred_and_distorted_vision"
+        ]
+    },
+    "Gastroenteritis": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "vomiting",
+            "sunken_eyes",
+            "dehydration",
+            "diarrhoea"
+        ]
+    },
+    "Bronchial Asthma": {
+        "speciality": "Pulmonology",
+        "symptoms": [
+            "cough",
+            "fatigue",
+            "mucoid_sputum",
+            "breathlessness",
+            "high_fever",
+            "family_history"
+        ]
+    },
+    "Hypertension": {
+        "speciality": "Cardiology",
+        "symptoms": [
+            "loss_of_balance",
+            "dizziness",
+            "headache",
+            "lack_of_concentration",
+            "chest_pain"
+        ]
+    },
+    "Migraine": {
+        "speciality": "Neurology",
+        "symptoms": [
+            "depression",
+            "visual_disturbances",
+            "stiff_neck",
+            "headache",
+            "irritability",
+            "indigestion",
+            "excessive_hunger",
+            "acidity",
+            "blurred_and_distorted_vision"
+        ]
+    },
+    "Cervical spondylosis": {
+        "speciality": "Orthopedics",
+        "symptoms": [
+            "weakness_in_limbs",
+            "loss_of_balance",
+            "dizziness",
+            "neck_pain",
+            "back_pain"
+        ]
+    },
+    "Paralysis (brain hemorrhage)": {
+        "speciality": "Neurology",
+        "symptoms": [
+            "vomiting",
+            "altered_sensorium",
+            "weakness_of_one_body_side",
+            "headache"
+        ]
+    },
+    "Jaundice": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "vomiting",
+            "weight_loss",
+            "fatigue",
+            "yellowish_skin",
+            "abdominal_pain",
+            "high_fever",
+            "itching",
+            "dark_urine"
+        ]
+    },
+    "Malaria": {
+        "speciality": "Infectious Disease Specialist",
+        "symptoms": [
+            "muscle_pain",
+            "vomiting",
+            "chills",
+            "nausea",
+            "headache",
+            "high_fever",
+            "diarrhoea",
+            "sweating"
+        ]
+    },
+    "Chicken pox": {
+        "speciality": "Dermatology",
+        "symptoms": [
+            "lethargy",
+            "swelled_lymph_nodes",
+            "fatigue",
+            "headache",
+            "mild_fever",
+            "skin_rash",
+            "high_fever",
+            "red_spots_over_body",
+            "itching",
+            "malaise",
+            "loss_of_appetite"
+        ]
+    },
+    "Dengue": {
+        "speciality": "Infectious Disease Specialist",
+        "symptoms": [
+            "joint_pain",
+            "muscle_pain",
+            "vomiting",
+            "chills",
+            "nausea",
+            "fatigue",
+            "headache",
+            "pain_behind_the_eyes",
+            "skin_rash",
+            "high_fever",
+            "back_pain",
+            "red_spots_over_body",
+            "malaise",
+            "loss_of_appetite"
+        ]
+    },
+    "Typhoid": {
+        "speciality": "Infectious Disease Specialist",
+        "symptoms": [
+            "vomiting",
+            "chills",
+            "nausea",
+            "fatigue",
+            "headache",
+            "constipation",
+            "abdominal_pain",
+            "high_fever",
+            "belly_pain",
+            "diarrhoea",
+            "toxic_look_(typhos)"
+        ]
+    },
+    "hepatitis A": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "joint_pain",
+            "muscle_pain",
+            "vomiting",
+            "nausea",
+            "yellowing_of_eyes",
+            "mild_fever",
+            "abdominal_pain",
+            "yellowish_skin",
+            "loss_of_appetite",
+            "dark_urine",
+            "diarrhoea"
+        ]
+    },
+    "Hepatitis B": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "yellowing_of_eyes",
+            "lethargy",
+            "fatigue",
+            "receiving_unsterile_injections",
+            "abdominal_pain",
+            "receiving_blood_transfusion",
+            "yellowish_skin",
+            "yellow_urine",
+            "loss_of_appetite",
+            "dark_urine",
+            "malaise",
+            "itching"
+        ]
+    },
+    "Hepatitis C": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "family_history",
+            "nausea",
+            "yellowing_of_eyes",
+            "fatigue",
+            "yellowish_skin",
+            "loss_of_appetite"
+        ]
+    },
+    "Hepatitis D": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "joint_pain",
+            "vomiting",
+            "nausea",
+            "yellowing_of_eyes",
+            "fatigue",
+            "abdominal_pain",
+            "yellowish_skin",
+            "loss_of_appetite",
+            "dark_urine"
+        ]
+    },
+    "Hepatitis E": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "joint_pain",
+            "vomiting",
+            "nausea",
+            "yellowing_of_eyes",
+            "fatigue",
+            "abdominal_pain",
+            "coma",
+            "high_fever",
+            "yellowish_skin",
+            "stomach_bleeding",
+            "loss_of_appetite",
+            "dark_urine",
+            "acute_liver_failure"
+        ]
+    },
+    "Alcoholic hepatitis": {
+        "speciality": "Gastroenterology",
+        "symptoms": [
+            "swelling_of_stomach",
+            "vomiting",
+            "fluid_overload",
+            "history_of_alcohol_consumption",
+            "abdominal_pain",
+            "yellowish_skin",
+            "distention_of_abdomen"
+        ]
+    },
+    "Tuberculosis": {
+        "speciality": "Pulmonology",
+        "symptoms": [
+            "cough",
+            "vomiting",
+            "chills",
+            "blood_in_sputum",
+            "phlegm",
+            "weight_loss",
+            "yellowing_of_eyes",
+            "swelled_lymph_nodes",
+            "fatigue",
+            "mild_fever",
+            "breathlessness",
+            "high_fever",
+            "malaise",
+            "loss_of_appetite",
+            "chest_pain",
+            "sweating"
+        ]
+    },
+    "Common Cold": {
+        "speciality": "General Physician",
+        "symptoms": [
+            "muscle_pain",
+            "cough",
+            "chills",
+            "redness_of_eyes",
+            "phlegm",
+            "continuous_sneezing",
+            "swelled_lymph_nodes",
+            "fatigue",
+            "headache",
+            "throat_irritation",
+            "congestion",
+            "high_fever",
+            "loss_of_smell",
+            "malaise",
+            "chest_pain",
+            "sinus_pressure",
+            "runny_nose"
+        ]
+    },
+    "Pneumonia": {
+        "speciality": "Pulmonology",
+        "symptoms": [
+            "cough",
+            "chills",
+            "phlegm",
+            "fast_heart_rate",
+            "fatigue",
+            "rusty_sputum",
+            "breathlessness",
+            "high_fever",
+            "malaise",
+            "chest_pain",
+            "sweating"
+        ]
+    },
+    "Dimorphic hemmorhoids(piles)": {
+        "speciality": "General Surgeon",
+        "symptoms": [
+            "pain_during_bowel_movements",
+            "irritation_in_anus",
+            "bloody_stool",
+            "constipation",
+            "pain_in_anal_region"
+        ]
+    },
+    "Heart attack": {
+        "speciality": "Cardiology",
+        "symptoms": [
+            "vomiting",
+            "chest_pain",
+            "sweating",
+            "breathlessness"
+        ]
+    },
+    "Varicose veins": {
+        "speciality": "Vascular Surgeon",
+        "symptoms": [
+            "obesity",
+            "prominent_veins_on_calf",
+            "bruising",
+            "swollen_blood_vessels",
+            "swollen_legs",
+            "fatigue",
+            "cramps"
+        ]
+    },
+    "Hypothyroidism": {
+        "speciality": "Endocrinology",
+        "symptoms": [
+            "depression",
+            "puffy_face_and_eyes",
+            "mood_swings",
+            "dizziness",
+            "lethargy",
+            "weight_gain",
+            "fatigue",
+            "brittle_nails",
+            "swollen_extremeties",
+            "irritability",
+            "abnormal_menstruation",
+            "enlarged_thyroid",
+            "cold_hands_and_feets"
+        ]
+    },
+    "Hyperthyroidism": {
+        "speciality": "Endocrinology",
+        "symptoms": [
+            "muscle_weakness",
+            "mood_swings",
+            "weight_loss",
+            "fast_heart_rate",
+            "restlessness",
+            "fatigue",
+            "irritability",
+            "abnormal_menstruation",
+            "excessive_hunger",
+            "diarrhoea",
+            "sweating"
+        ]
+    },
+    "Hypoglycemia": {
+        "speciality": "Endocrinology",
+        "symptoms": [
+            "vomiting",
+            "nausea",
+            "palpitations",
+            "drying_and_tingling_lips",
+            "headache",
+            "fatigue",
+            "irritability",
+            "excessive_hunger",
+            "slurred_speech",
+            "anxiety",
+            "blurred_and_distorted_vision",
+            "sweating"
+        ]
+    },
+    "Osteoarthristis": {
+        "speciality": "Orthopedics",
+        "symptoms": [
+            "joint_pain",
+            "neck_pain",
+            "knee_pain",
+            "hip_joint_pain",
+            "swelling_joints",
+            "painful_walking"
+        ]
+    },
+    "Arthritis": {
+        "speciality": "Rheumatology",
+        "symptoms": [
+            "muscle_weakness",
+            "stiff_neck",
+            "swelling_joints",
+            "movement_stiffness",
+            "painful_walking"
+        ]
+    },
+    "(vertigo) Paroymsal  Positional Vertigo": {
+        "speciality": "ENT Specialist",
+        "symptoms": [
+            "vomiting",
+            "nausea",
+            "loss_of_balance",
+            "headache",
+            "unsteadiness",
+            "spinning_movements"
+        ]
+    },
+    "Acne": {
+        "speciality": "Dermatology",
+        "symptoms": [
+            "skin_rash",
+            "blackheads",
+            "scurring",
+            "pus_filled_pimples"
+        ]
+    },
+    "Urinary tract infection": {
+        "speciality": "Urologist",
+        "symptoms": [
+            "foul_smell_of urine",
+            "bladder_discomfort",
+            "burning_micturition",
+            "continuous_feel_of_urine"
+        ]
+    },
+    "Psoriasis": {
+        "speciality": "Dermatology",
+        "symptoms": [
+            "joint_pain",
+            "inflammatory_nails",
+            "skin_peeling",
+            "silver_like_dusting",
+            "small_dents_in_nails",
+            "skin_rash"
+        ]
+    },
+    "Impetigo": {
+        "speciality": "Dermatology",
+        "symptoms": [
+            "red_sore_around_nose",
+            "yellow_crust_ooze",
+            "skin_rash",
+            "high_fever",
+            "blister"
+        ]
+    }
+}

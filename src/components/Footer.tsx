@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stethoscope, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import WhatsAppCTA from './WhatsAppCTA';
 
 const Footer: React.FC = () => {
   const footerLinks = {
@@ -84,6 +85,13 @@ const Footer: React.FC = () => {
                 <div className="flex items-center space-x-3">
                   <MapPin className="w-5 h-5 text-primary-400" />
                   <span className="text-gray-400">Bangalore, India</span>
+                </div>
+                <div className="mt-4">
+                  <WhatsAppCTA
+                    phoneNumber="918431361112"
+                    message="Hi, I'd like to know more about the RxDoctor app"
+                    label="Chat with us on WhatsApp"
+                  />
                 </div>
               </div>
             </div>
